@@ -58,18 +58,6 @@ public partial class ArithmeticBaseListener : IArithmeticListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitAtom([NotNull] ArithmeticParser.AtomContext context) { }
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="ArithmeticParser.number"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void EnterNumber([NotNull] ArithmeticParser.NumberContext context) { }
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="ArithmeticParser.number"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void ExitNumber([NotNull] ArithmeticParser.NumberContext context) { }
 
 	/// <inheritdoc/>
 	/// <remarks>The default implementation does nothing.</remarks>

@@ -50,14 +50,4 @@ public interface IArithmeticListener : IParseTreeListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitAtom([NotNull] ArithmeticParser.AtomContext context);
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="ArithmeticParser.number"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterNumber([NotNull] ArithmeticParser.NumberContext context);
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="ArithmeticParser.number"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitNumber([NotNull] ArithmeticParser.NumberContext context);
 }

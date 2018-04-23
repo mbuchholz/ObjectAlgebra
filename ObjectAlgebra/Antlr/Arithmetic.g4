@@ -4,9 +4,15 @@ options {
     language=CSharp;
 }
 
-expression: atom ((PLUS | MINUS) atom)*;
-atom: number | LPAREN expression RPAREN;
-number: NUMBER;
+expression
+    : atom
+    | expression (PLUS | MINUS) expression
+    ;
+
+atom
+    : LPAREN expression RPAREN
+    | NUMBER
+    ;
 
 LPAREN: '(';
 RPAREN: ')';

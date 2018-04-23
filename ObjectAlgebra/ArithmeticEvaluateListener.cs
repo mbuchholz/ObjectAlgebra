@@ -43,16 +43,6 @@ namespace ObjectAlgebra
             base.ExitAtom(context);
         }
 
-        public override void EnterNumber([NotNull] ArithmeticParser.NumberContext context)
-        {
-            base.EnterNumber(context);
-        }
-
-        public override void ExitNumber([NotNull] ArithmeticParser.NumberContext context)
-        {
-            base.ExitNumber(context);
-        }
-
         void HandleExpression([NotNull] ParserRuleContext context)
         {
             while (arguments.Count > 1)

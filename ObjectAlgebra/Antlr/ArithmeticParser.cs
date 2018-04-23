@@ -38,9 +38,9 @@ public partial class ArithmeticParser : Parser {
 	public const int
 		LPAREN=1, RPAREN=2, PLUS=3, MINUS=4, NUMBER=5, WS=6;
 	public const int
-		RULE_expression = 0, RULE_atom = 1, RULE_number = 2;
+		RULE_expression = 0, RULE_atom = 1;
 	public static readonly string[] ruleNames = {
-		"expression", "atom", "number"
+		"expression", "atom"
 	};
 
 	private static readonly string[] _LiteralNames = {
@@ -81,20 +81,17 @@ public partial class ArithmeticParser : Parser {
 		Interpreter = new ParserATNSimulator(this, _ATN, decisionToDFA, sharedContextCache);
 	}
 	public partial class ExpressionContext : ParserRuleContext {
-		public AtomContext[] atom() {
-			return GetRuleContexts<AtomContext>();
+		public AtomContext atom() {
+			return GetRuleContext<AtomContext>(0);
 		}
-		public AtomContext atom(int i) {
-			return GetRuleContext<AtomContext>(i);
+		public ExpressionContext[] expression() {
+			return GetRuleContexts<ExpressionContext>();
 		}
-		public ITerminalNode[] PLUS() { return GetTokens(ArithmeticParser.PLUS); }
-		public ITerminalNode PLUS(int i) {
-			return GetToken(ArithmeticParser.PLUS, i);
+		public ExpressionContext expression(int i) {
+			return GetRuleContext<ExpressionContext>(i);
 		}
-		public ITerminalNode[] MINUS() { return GetTokens(ArithmeticParser.MINUS); }
-		public ITerminalNode MINUS(int i) {
-			return GetToken(ArithmeticParser.MINUS, i);
-		}
+		public ITerminalNode PLUS() { return GetToken(ArithmeticParser.PLUS, 0); }
+		public ITerminalNode MINUS() { return GetToken(ArithmeticParser.MINUS, 0); }
 		public ExpressionContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
 		{
@@ -112,34 +109,55 @@ public partial class ArithmeticParser : Parser {
 
 	[RuleVersion(0)]
 	public ExpressionContext expression() {
-		ExpressionContext _localctx = new ExpressionContext(Context, State);
-		EnterRule(_localctx, 0, RULE_expression);
+		return expression(0);
+	}
+
+	private ExpressionContext expression(int _p) {
+		ParserRuleContext _parentctx = Context;
+		int _parentState = State;
+		ExpressionContext _localctx = new ExpressionContext(Context, _parentState);
+		ExpressionContext _prevctx = _localctx;
+		int _startState = 0;
+		EnterRecursionRule(_localctx, 0, RULE_expression, _p);
 		int _la;
 		try {
+			int _alt;
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 6; atom();
-			State = 11;
+			{
+			State = 5; atom();
+			}
+			Context.Stop = TokenStream.LT(-1);
+			State = 12;
 			ErrorHandler.Sync(this);
-			_la = TokenStream.LA(1);
-			while (_la==PLUS || _la==MINUS) {
-				{
-				{
-				State = 7;
-				_la = TokenStream.LA(1);
-				if ( !(_la==PLUS || _la==MINUS) ) {
-				ErrorHandler.RecoverInline(this);
+			_alt = Interpreter.AdaptivePredict(TokenStream,0,Context);
+			while ( _alt!=2 && _alt!=global::Antlr4.Runtime.Atn.ATN.INVALID_ALT_NUMBER ) {
+				if ( _alt==1 ) {
+					if ( ParseListeners!=null )
+						TriggerExitRuleEvent();
+					_prevctx = _localctx;
+					{
+					{
+					_localctx = new ExpressionContext(_parentctx, _parentState);
+					PushNewRecursionContext(_localctx, _startState, RULE_expression);
+					State = 7;
+					if (!(Precpred(Context, 1))) throw new FailedPredicateException(this, "Precpred(Context, 1)");
+					State = 8;
+					_la = TokenStream.LA(1);
+					if ( !(_la==PLUS || _la==MINUS) ) {
+					ErrorHandler.RecoverInline(this);
+					}
+					else {
+						ErrorHandler.ReportMatch(this);
+					    Consume();
+					}
+					State = 9; expression(2);
+					}
+					} 
 				}
-				else {
-					ErrorHandler.ReportMatch(this);
-				    Consume();
-				}
-				State = 8; atom();
-				}
-				}
-				State = 13;
+				State = 14;
 				ErrorHandler.Sync(this);
-				_la = TokenStream.LA(1);
+				_alt = Interpreter.AdaptivePredict(TokenStream,0,Context);
 			}
 			}
 		}
@@ -149,20 +167,18 @@ public partial class ArithmeticParser : Parser {
 			ErrorHandler.Recover(this, re);
 		}
 		finally {
-			ExitRule();
+			UnrollRecursionContexts(_parentctx);
 		}
 		return _localctx;
 	}
 
 	public partial class AtomContext : ParserRuleContext {
-		public NumberContext number() {
-			return GetRuleContext<NumberContext>(0);
-		}
 		public ITerminalNode LPAREN() { return GetToken(ArithmeticParser.LPAREN, 0); }
 		public ExpressionContext expression() {
 			return GetRuleContext<ExpressionContext>(0);
 		}
 		public ITerminalNode RPAREN() { return GetToken(ArithmeticParser.RPAREN, 0); }
+		public ITerminalNode NUMBER() { return GetToken(ArithmeticParser.NUMBER, 0); }
 		public AtomContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
 		{
@@ -183,21 +199,21 @@ public partial class ArithmeticParser : Parser {
 		AtomContext _localctx = new AtomContext(Context, State);
 		EnterRule(_localctx, 2, RULE_atom);
 		try {
-			State = 19;
+			State = 20;
 			ErrorHandler.Sync(this);
 			switch (TokenStream.LA(1)) {
-			case NUMBER:
+			case LPAREN:
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 14; number();
+				State = 15; Match(LPAREN);
+				State = 16; expression(0);
+				State = 17; Match(RPAREN);
 				}
 				break;
-			case LPAREN:
+			case NUMBER:
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 15; Match(LPAREN);
-				State = 16; expression();
-				State = 17; Match(RPAREN);
+				State = 19; Match(NUMBER);
 				}
 				break;
 			default:
@@ -215,66 +231,41 @@ public partial class ArithmeticParser : Parser {
 		return _localctx;
 	}
 
-	public partial class NumberContext : ParserRuleContext {
-		public ITerminalNode NUMBER() { return GetToken(ArithmeticParser.NUMBER, 0); }
-		public NumberContext(ParserRuleContext parent, int invokingState)
-			: base(parent, invokingState)
-		{
+	public override bool Sempred(RuleContext _localctx, int ruleIndex, int predIndex) {
+		switch (ruleIndex) {
+		case 0: return expression_sempred((ExpressionContext)_localctx, predIndex);
 		}
-		public override int RuleIndex { get { return RULE_number; } }
-		public override void EnterRule(IParseTreeListener listener) {
-			IArithmeticListener typedListener = listener as IArithmeticListener;
-			if (typedListener != null) typedListener.EnterNumber(this);
-		}
-		public override void ExitRule(IParseTreeListener listener) {
-			IArithmeticListener typedListener = listener as IArithmeticListener;
-			if (typedListener != null) typedListener.ExitNumber(this);
-		}
+		return true;
 	}
-
-	[RuleVersion(0)]
-	public NumberContext number() {
-		NumberContext _localctx = new NumberContext(Context, State);
-		EnterRule(_localctx, 4, RULE_number);
-		try {
-			EnterOuterAlt(_localctx, 1);
-			{
-			State = 21; Match(NUMBER);
-			}
+	private bool expression_sempred(ExpressionContext _localctx, int predIndex) {
+		switch (predIndex) {
+		case 0: return Precpred(Context, 1);
 		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			ErrorHandler.ReportError(this, re);
-			ErrorHandler.Recover(this, re);
-		}
-		finally {
-			ExitRule();
-		}
-		return _localctx;
+		return true;
 	}
 
 	private static char[] _serializedATN = {
 		'\x3', '\x608B', '\xA72A', '\x8133', '\xB9ED', '\x417C', '\x3BE7', '\x7786', 
-		'\x5964', '\x3', '\b', '\x1A', '\x4', '\x2', '\t', '\x2', '\x4', '\x3', 
-		'\t', '\x3', '\x4', '\x4', '\t', '\x4', '\x3', '\x2', '\x3', '\x2', '\x3', 
-		'\x2', '\a', '\x2', '\f', '\n', '\x2', '\f', '\x2', '\xE', '\x2', '\xF', 
-		'\v', '\x2', '\x3', '\x3', '\x3', '\x3', '\x3', '\x3', '\x3', '\x3', '\x3', 
-		'\x3', '\x5', '\x3', '\x16', '\n', '\x3', '\x3', '\x4', '\x3', '\x4', 
-		'\x3', '\x4', '\x2', '\x2', '\x5', '\x2', '\x4', '\x6', '\x2', '\x3', 
-		'\x3', '\x2', '\x5', '\x6', '\x2', '\x18', '\x2', '\b', '\x3', '\x2', 
-		'\x2', '\x2', '\x4', '\x15', '\x3', '\x2', '\x2', '\x2', '\x6', '\x17', 
-		'\x3', '\x2', '\x2', '\x2', '\b', '\r', '\x5', '\x4', '\x3', '\x2', '\t', 
-		'\n', '\t', '\x2', '\x2', '\x2', '\n', '\f', '\x5', '\x4', '\x3', '\x2', 
-		'\v', '\t', '\x3', '\x2', '\x2', '\x2', '\f', '\xF', '\x3', '\x2', '\x2', 
-		'\x2', '\r', '\v', '\x3', '\x2', '\x2', '\x2', '\r', '\xE', '\x3', '\x2', 
-		'\x2', '\x2', '\xE', '\x3', '\x3', '\x2', '\x2', '\x2', '\xF', '\r', '\x3', 
-		'\x2', '\x2', '\x2', '\x10', '\x16', '\x5', '\x6', '\x4', '\x2', '\x11', 
-		'\x12', '\a', '\x3', '\x2', '\x2', '\x12', '\x13', '\x5', '\x2', '\x2', 
-		'\x2', '\x13', '\x14', '\a', '\x4', '\x2', '\x2', '\x14', '\x16', '\x3', 
-		'\x2', '\x2', '\x2', '\x15', '\x10', '\x3', '\x2', '\x2', '\x2', '\x15', 
-		'\x11', '\x3', '\x2', '\x2', '\x2', '\x16', '\x5', '\x3', '\x2', '\x2', 
-		'\x2', '\x17', '\x18', '\a', '\a', '\x2', '\x2', '\x18', '\a', '\x3', 
-		'\x2', '\x2', '\x2', '\x4', '\r', '\x15',
+		'\x5964', '\x3', '\b', '\x19', '\x4', '\x2', '\t', '\x2', '\x4', '\x3', 
+		'\t', '\x3', '\x3', '\x2', '\x3', '\x2', '\x3', '\x2', '\x3', '\x2', '\x3', 
+		'\x2', '\x3', '\x2', '\a', '\x2', '\r', '\n', '\x2', '\f', '\x2', '\xE', 
+		'\x2', '\x10', '\v', '\x2', '\x3', '\x3', '\x3', '\x3', '\x3', '\x3', 
+		'\x3', '\x3', '\x3', '\x3', '\x5', '\x3', '\x17', '\n', '\x3', '\x3', 
+		'\x3', '\x2', '\x3', '\x2', '\x4', '\x2', '\x4', '\x2', '\x3', '\x3', 
+		'\x2', '\x5', '\x6', '\x2', '\x18', '\x2', '\x6', '\x3', '\x2', '\x2', 
+		'\x2', '\x4', '\x16', '\x3', '\x2', '\x2', '\x2', '\x6', '\a', '\b', '\x2', 
+		'\x1', '\x2', '\a', '\b', '\x5', '\x4', '\x3', '\x2', '\b', '\xE', '\x3', 
+		'\x2', '\x2', '\x2', '\t', '\n', '\f', '\x3', '\x2', '\x2', '\n', '\v', 
+		'\t', '\x2', '\x2', '\x2', '\v', '\r', '\x5', '\x2', '\x2', '\x4', '\f', 
+		'\t', '\x3', '\x2', '\x2', '\x2', '\r', '\x10', '\x3', '\x2', '\x2', '\x2', 
+		'\xE', '\f', '\x3', '\x2', '\x2', '\x2', '\xE', '\xF', '\x3', '\x2', '\x2', 
+		'\x2', '\xF', '\x3', '\x3', '\x2', '\x2', '\x2', '\x10', '\xE', '\x3', 
+		'\x2', '\x2', '\x2', '\x11', '\x12', '\a', '\x3', '\x2', '\x2', '\x12', 
+		'\x13', '\x5', '\x2', '\x2', '\x2', '\x13', '\x14', '\a', '\x4', '\x2', 
+		'\x2', '\x14', '\x17', '\x3', '\x2', '\x2', '\x2', '\x15', '\x17', '\a', 
+		'\a', '\x2', '\x2', '\x16', '\x11', '\x3', '\x2', '\x2', '\x2', '\x16', 
+		'\x15', '\x3', '\x2', '\x2', '\x2', '\x17', '\x5', '\x3', '\x2', '\x2', 
+		'\x2', '\x4', '\xE', '\x16',
 	};
 
 	public static readonly ATN _ATN =
