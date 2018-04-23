@@ -12,6 +12,7 @@
   <ItemGroup>
     <Folder Include="DynamicProxy\" />
     <Folder Include="Antlr\" />
+    <Folder Include="Arithmetic\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Antlr\Ltl.interp" />
