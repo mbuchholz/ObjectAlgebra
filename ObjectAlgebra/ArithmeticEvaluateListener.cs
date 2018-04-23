@@ -1,23 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
+using Antlr4.Runtime;
 using Antlr4.Runtime.Misc;
 using Antlr4.Runtime.Tree;
 
 namespace ObjectAlgebra
 {
-    public class ArithmeticEvaluateListener : ArithmeticBaseListener
+    public class ArithmeticEvaluateListener<T> : ArithmeticBaseListener
     {
-        readonly IExpAlg<IEval> alg;
-        readonly Stack<IEval> argStack = new Stack<IEval>();
-        readonly Stack<int> opStack = new Stack<int>();
+        readonly ISubExpAlg<T> alg;
+        readonly Stack<T> arguments = new Stack<T>();
+        readonly Stack<int> operations = new Stack<int>();
 
-        public ArithmeticEvaluateListener(IExpAlg<IEval> alg)
+        public ArithmeticEvaluateListener(ISubExpAlg<T> alg)
         {
             this.alg = alg;
         }
 
-        public IEval GetResult() {
-            return argStack.Pop();
+        public T GetResult() {
+            return arguments.Pop();
+        }
+
+        public override void EnterExpression([NotNull] ArithmeticParser.ExpressionContext context)
+        {
+            base.EnterExpression(context);
         }
 
         public override void ExitExpression([NotNull] ArithmeticParser.ExpressionContext context)
@@ -27,17 +33,43 @@ namespace ObjectAlgebra
             base.ExitExpression(context);
         }
 
-        void HandleExpression([NotNull] ArithmeticParser.ExpressionContext context)
+        public override void EnterAtom([NotNull] ArithmeticParser.AtomContext context)
         {
-            var left = argStack.Pop();
-            var right = argStack.Pop();
-            var operation = opStack.Pop();
+            base.EnterAtom(context);
+        }
 
-            switch (operation)
+        public override void ExitAtom([NotNull] ArithmeticParser.AtomContext context)
+        {
+            base.ExitAtom(context);
+        }
+
+        public override void EnterNumber([NotNull] ArithmeticParser.NumberContext context)
+        {
+            base.EnterNumber(context);
+        }
+
+        public override void ExitNumber([NotNull] ArithmeticParser.NumberContext context)
+        {
+            base.ExitNumber(context);
+        }
+
+        void HandleExpression([NotNull] ParserRuleContext context)
+        {
+            while (arguments.Count > 1)
             {
-                case ArithmeticParser.PLUS:
-                    argStack.Push(alg.Add(left, right));
-                    break;
+                var right = arguments.Pop();
+                var left = arguments.Pop();
+                var operation = operations.Pop();
+
+                switch (operation)
+                {
+                    case ArithmeticParser.PLUS:
+                        arguments.Push(alg.Add(left, right));
+                        break;
+                    case ArithmeticParser.MINUS:
+                        arguments.Push(alg.Sub(left, right));
+                        break;
+                }
             }
         }
 
@@ -49,11 +81,11 @@ namespace ObjectAlgebra
             switch (type)
             {
                 case ArithmeticParser.NUMBER:
-                    argStack.Push(alg.Lit(Int32.Parse(symbol.Text)));
+                    arguments.Push(alg.Lit(Int32.Parse(symbol.Text)));
                     break;
                 case ArithmeticParser.MINUS:
                 case ArithmeticParser.PLUS:
-                    opStack.Push(type);
+                    operations.Push(type);
                     break;
 
             }
