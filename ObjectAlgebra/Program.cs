@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Globalization;
+using Antlr4.Runtime;
+using Antlr4.Runtime.Tree;
 using ObjectAlgebra.DynamicProxy;
 
 namespace ObjectAlgebra
 {
     // Initial object algebra interface for expressions: integers and addition
-    interface IExpAlg<E>
+    public interface IExpAlg<E>
     {
         E Lit(int x);
         E Add(E e1, E e2);
@@ -147,6 +149,22 @@ namespace ObjectAlgebra
             Console.WriteLine("Evaluation of Exp2 '{0}' is: {1}", Exp2(pa).Print(), Exp2(esa).Eval());
             Console.WriteLine("The alternative pretty printer works nicely too!{0}Exp1: {1}{0}Exp2: {2}",
                               Environment.NewLine, Exp1(pa2), Exp2(pa2));
+
+            IEval ast = BuildAst(ea);
+            Console.WriteLine("Evaluation through object algebra: {0}", ast.Eval());
+        }
+
+        public static IEval BuildAst(IExpAlg<IEval> alg)
+        {
+            String input = "3 + 4";
+            ICharStream stream = CharStreams.fromstring(input);
+            ITokenSource lexer = new ArithmeticLexer(stream);
+            ITokenStream tokens = new CommonTokenStream(lexer);
+            ArithmeticParser parser = new ArithmeticParser(tokens);
+            ArithmeticEvaluateListener listener = new ArithmeticEvaluateListener(alg);
+            ParseTreeWalker.Default.Walk(listener, parser.expression());
+
+            return listener.GetResult();
         }
     }
 }
