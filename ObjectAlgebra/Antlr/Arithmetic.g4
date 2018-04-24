@@ -1,4 +1,4 @@
-﻿grammar Arithmetic;
+grammar Arithmetic;
  
 options {
     language=CSharp;

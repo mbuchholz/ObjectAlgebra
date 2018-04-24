@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using ObjectAlgebra.DynamicProxy;
 
 namespace ObjectAlgebra.Ltl

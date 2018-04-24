@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 namespace ObjectAlgebra.Ltl
 {
     public interface ILtlBase<T>
