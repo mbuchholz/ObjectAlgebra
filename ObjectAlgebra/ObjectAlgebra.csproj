@@ -17,4 +17,7 @@
   <ItemGroup>
     <None Remove="Antlr\Ltl.interp" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="IAstBuilder.cs" />
+  </ItemGroup>
 </Project>

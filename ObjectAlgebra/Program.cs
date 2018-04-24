@@ -2,6 +2,7 @@
 using Antlr4.Runtime;
 using Antlr4.Runtime.Tree;
 using ObjectAlgebra.Arithmetic;
+using ObjectAlgebra.Ltl;
 
 namespace ObjectAlgebra
 {
@@ -45,8 +46,16 @@ namespace ObjectAlgebra
                               Environment.NewLine, Exp1(pa2), Exp2(pa2));
 
             IPPrint printer = BuildAst(pa);
-            IEval eval = BuildAst(esa);
+            Arithmetic.IEval eval = BuildAst(esa);
             Console.WriteLine("Evaluation through object algebra: {0} = {1}", printer.Print(), eval.Eval());
+
+
+
+            // -------- LTL ----------
+            var ltl = new LtlBase();
+            Ltl.IEval evaluation = ltl.Next(ltl.Next(ltl.Proposition(true)));
+
+            Console.WriteLine("The LTL formula is: {0}", evaluation.Eval("abTRUE"));
         }
 
         public static E BuildAst<E>(ISubExpAlg<E> alg)
