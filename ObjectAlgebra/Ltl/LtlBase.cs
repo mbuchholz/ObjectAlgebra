@@ -19,19 +19,25 @@ namespace ObjectAlgebra.Ltl
 
         public IEval Negation(IEval child)
         {
-            Func<String, bool> f = (word) => !child.Eval(word);
+            Func<String, bool> f = (word) => {
+                return !child.Eval(word);
+            };
             return DelegateWrapper.WrapAs<IEval>(f);
         }
 
         public IEval Next(IEval child)
         {
-            Func<String, bool> f = (word) => word.Length != 0 && child.Eval(word.Substring(1));
+            Func<String, bool> f = (word) => {
+                return word.Length != 0 && child.Eval(word.Substring(1));
+            };
             return DelegateWrapper.WrapAs<IEval>(f);
         }
 
         public IEval Proposition(bool val)
         {
-            Func<String, bool> f = (word) => val;
+            Func<String, bool> f = (word) => {
+                return val;
+            };
             return DelegateWrapper.WrapAs<IEval>(f);
         }
 
@@ -42,7 +48,9 @@ namespace ObjectAlgebra.Ltl
 
         public IEval Variable(string name)
         {
-            Func<String, bool> f = (word) => word.Equals(name);
+            Func<String, bool> f = (word) => {
+                return word.Length > 0 && word[0].Equals(name);
+            };
             return DelegateWrapper.WrapAs<IEval>(f);
         }
     }
