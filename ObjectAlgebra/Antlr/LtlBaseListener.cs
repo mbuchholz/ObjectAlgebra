@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from Ltl.g4 by ANTLR 4.7.1
+// Generated from /Volumes/Data/Projects/C#/ObjectAlgebra/ObjectAlgebra/Ltl.g4 by ANTLR 4.7.1
 
 // Unreachable code detected
 #pragma warning disable 0162
@@ -19,6 +19,7 @@
 // Ambiguous reference in cref attribute
 #pragma warning disable 419
 
+namespace ObjectAlgebra.Antlr {
 
 using Antlr4.Runtime.Misc;
 using IErrorNode = Antlr4.Runtime.Tree.IErrorNode;
@@ -120,3 +121,4 @@ public partial class LtlBaseListener : ILtlListener {
 	/// <remarks>The default implementation does nothing.</remarks>
 	public virtual void VisitErrorNode([NotNull] IErrorNode node) { }
 }
+} // namespace ObjectAlgebra.Antlr

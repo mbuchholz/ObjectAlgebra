@@ -9,15 +9,4 @@
     <PackageReference Include="Castle.Core" Version="4.2.1" />
     <PackageReference Include="Antlr4.Runtime.Standard" Version="4.7.1.1" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DynamicProxy\" />
-    <Folder Include="Antlr\" />
-    <Folder Include="Arithmetic\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Remove="Antlr\Ltl.interp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Remove="IAstBuilder.cs" />
-  </ItemGroup>
 </Project>

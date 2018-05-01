@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from Ltl.g4 by ANTLR 4.7.1
+// Generated from /Volumes/Data/Projects/C#/ObjectAlgebra/ObjectAlgebra/Ltl.g4 by ANTLR 4.7.1
 
 // Unreachable code detected
 #pragma warning disable 0162
@@ -19,6 +19,7 @@
 // Ambiguous reference in cref attribute
 #pragma warning disable 419
 
+namespace ObjectAlgebra.Antlr {
 using Antlr4.Runtime.Misc;
 using IParseTreeListener = Antlr4.Runtime.Tree.IParseTreeListener;
 using IToken = Antlr4.Runtime.IToken;
@@ -91,3 +92,4 @@ public interface ILtlListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitProposition([NotNull] LtlParser.PropositionContext context);
 }
+} // namespace ObjectAlgebra.Antlr

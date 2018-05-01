@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from Arithmetic.g4 by ANTLR 4.7.1
+// Generated from /Volumes/Data/Projects/C#/ObjectAlgebra/ObjectAlgebra/Arithmetic.g4 by ANTLR 4.7.1
 
 // Unreachable code detected
 #pragma warning disable 0162
@@ -19,6 +19,7 @@
 // Ambiguous reference in cref attribute
 #pragma warning disable 419
 
+namespace ObjectAlgebra.Antlr {
 using System;
 using System.IO;
 using System.Text;
@@ -135,3 +136,4 @@ public partial class ArithmeticLexer : Lexer {
 
 
 }
+} // namespace ObjectAlgebra.Antlr
