@@ -61,13 +61,14 @@ namespace ObjectAlgebra
 
         public static E BuildAst<E>(ISubExpAlg<E> alg)
         {
-            String input = "1 + (2 - 3) + 4";
+            String input = "5 - (5 + 2)";
             ICharStream stream = CharStreams.fromstring(input);
             ITokenSource lexer = new ArithmeticLexer(stream);
             ITokenStream tokens = new CommonTokenStream(lexer);
             ArithmeticParser parser = new ArithmeticParser(tokens);
             ArithmeticEvaluateListener<E> listener = new ArithmeticEvaluateListener<E>(alg);
-            ParseTreeWalker.Default.Walk(listener, parser.expression());
+
+            parser.expression().EnterRule(listener);
 
             return listener.GetResult();
         }
