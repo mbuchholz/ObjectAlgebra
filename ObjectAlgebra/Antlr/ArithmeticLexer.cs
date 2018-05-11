@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from /Volumes/Data/Projects/C#/ObjectAlgebra/ObjectAlgebra/Arithmetic.g4 by ANTLR 4.7.1
+// Generated from Arithmetic.g4 by ANTLR 4.7.1
 
 // Unreachable code detected
 #pragma warning disable 0162
