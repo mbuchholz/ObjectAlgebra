@@ -43,7 +43,10 @@ namespace ObjectAlgebra.Ltl
 
         public IEval Until(IEval left, IEval right)
         {
-            throw new NotImplementedException();
+            Func<String, bool> f = (word) => {
+                return Disjunction(right, Conjunction(left, (Next(Until(left, right))))).Eval(word);
+            };
+            return DelegateWrapper.WrapAs<IEval>(f);
         }
 
         public IEval Variable(string name)
