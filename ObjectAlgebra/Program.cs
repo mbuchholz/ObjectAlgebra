@@ -53,7 +53,7 @@ namespace ObjectAlgebra
 
 
             // -------- LTL ----------
-            var ltl = new LtlBase();
+            var ltl = new LtlExtension();
             Ltl.IEval evaluation = ltl.Disjunction(ltl.Proposition(false), ltl.Proposition(true));
 
             Console.WriteLine("The LTL formula is: {0}", evaluation.Eval("abTRUE"));
