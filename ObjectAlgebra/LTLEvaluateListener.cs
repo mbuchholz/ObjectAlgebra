@@ -12,7 +12,6 @@ namespace ObjectAlgebra
     {
         readonly ILtlBase<T> alg;
         readonly Stack<T> arguments = new Stack<T>();
-        readonly Stack<T> operations = new Stack<T>();
 
          public LTLEvaluateListener (ILtlBase<T> alg){
              this.alg = alg;

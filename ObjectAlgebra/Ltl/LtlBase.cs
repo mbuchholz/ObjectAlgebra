@@ -52,7 +52,7 @@ namespace ObjectAlgebra.Ltl
         public IEval Variable(string name)
         {
             Func<String, bool> f = (word) => {
-                return word.Length > 0 && word[0].Equals(name);
+                return word.Length > 0 && word[0].ToString().Equals(name);
             };
             return DelegateWrapper.WrapAs<IEval>(f);
         }
