@@ -10,10 +10,10 @@ namespace ObjectAlgebra
 {
     public class LTLEvaluateListener<T> : LtlBaseListener
     {
-        readonly ILtlBase<T> alg;
+        readonly ILtlExtension<T> alg;
         readonly Stack<T> arguments = new Stack<T>();
 
-         public LTLEvaluateListener (ILtlBase<T> alg){
+         public LTLEvaluateListener (ILtlExtension<T> alg){
              this.alg = alg;
          }
 
@@ -99,7 +99,7 @@ namespace ObjectAlgebra
             if(finallyNodes.Length > 0)
             {
                 foreach(var op in finallyNodes){
-                    //arguments.Push(alg.Finally(arguments.Pop()));
+                    arguments.Push(alg.Finally(arguments.Pop()));
                 }
             } else if(nextNodes.Length > 0)
             {
