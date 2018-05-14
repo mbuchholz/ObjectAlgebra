@@ -34,7 +34,7 @@ namespace ObjectAlgebra
                     conjunctionContext.EnterRule(this);
                 }
 
-                if(disjunctionNode != null) 
+                if(disjunctionNode.Length > 0) 
                 {
                     var right = arguments.Pop();
                     var left = arguments.Pop();
@@ -55,7 +55,7 @@ namespace ObjectAlgebra
                 {
                     binaryContext.EnterRule(this);
                 }
-                if(conjunctionNode != null)
+                if(conjunctionNode.Length > 0)
                 {
                     var right = arguments.Pop();
                     var left = arguments.Pop();
@@ -77,7 +77,7 @@ namespace ObjectAlgebra
                 {
                     unaryContext.EnterRule(this);
                 }
-                if(untilNode != null)
+                if(untilNode.Length > 0)
                 {
                     var right = arguments.Pop();
                     var left = arguments.Pop();
@@ -97,12 +97,12 @@ namespace ObjectAlgebra
             {
                 negationContext.EnterRule(this);
             }
-            if(finallyNodes != null)
+            if(finallyNodes.Length > 0)
             {
                 foreach(var op in finallyNodes){
                     //arguments.Push(alg.Finally(arguments.Pop()));
                 }
-            } else if(nextNodes != null)
+            } else if(nextNodes.Length > 0)
             {
                 foreach(var op in nextNodes){
                     arguments.Push(alg.Next(arguments.Pop()));
@@ -120,7 +120,7 @@ namespace ObjectAlgebra
             {
                 propositionContext.EnterRule(this);
             }
-            if(negationNodes != null)
+            if(negationNodes.Length > 0)
             {
                 foreach(var op in negationNodes) {
                     arguments.Push(alg.Negation(arguments.Pop()));
