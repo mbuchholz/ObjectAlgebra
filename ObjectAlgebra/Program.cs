@@ -6,7 +6,7 @@ using ObjectAlgebra.Ltl;
 
 namespace ObjectAlgebra
 {
-    class Program
+    public class Program
     {
         private static void Main()
         {
