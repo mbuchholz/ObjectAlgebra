@@ -10,17 +10,18 @@ namespace ObjectAlgebra
     {
         private static void Main()
         {
+            String input = "!a&&Fc";
+
             var ltlEval = new LtlExtension();
             var ltlPrint = new PrettyPrint();
-            IEval evaluation = BuildAstLTL(ltlEval);
-            IPrettyPrint printing = BuildAstLTL(ltlPrint);
+            IEval evaluation = BuildAstLTL(ltlEval, input);
+            IPrettyPrint printing = BuildAstLTL(ltlPrint, input);
 
             Console.WriteLine("The LTL formula {0} is: {1}", printing.Print(), evaluation.Eval("bbbc"));
         }
 
-        public static E BuildAstLTL<E>(ILtlExtension<E> alg)
+        public static E BuildAstLTL<E>(ILtlExtension<E> alg, string input)
         {
-            String input = "!a&&Fc";
             ICharStream stream = CharStreams.fromstring(input);
             ITokenSource lexer = new LtlLexer(stream);
             ITokenStream tokens = new CommonTokenStream(lexer);
