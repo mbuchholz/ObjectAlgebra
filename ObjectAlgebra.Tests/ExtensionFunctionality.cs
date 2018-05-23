@@ -15,7 +15,7 @@ namespace ObjectAlgebra.Tests {
         [Theory]
         [InlineData("xxxxxyxxx", "Fy")]
         [InlineData("aaaaax", "aUFx")]
-        public void LtlFinallyTests (string input, string ltl) {
+        public void LtlFinallyTest (string input, string ltl) {
 
             IEval evaluation = Program.BuildAstLTL (_ltlEval, ltl);
             Assert.True (evaluation.Eval (input), $"{input} should be true");

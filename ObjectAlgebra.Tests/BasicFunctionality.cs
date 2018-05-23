@@ -15,7 +15,7 @@ namespace ObjectAlgebra.Tests {
         [Theory]
         [InlineData("bab", "Xa")]
         [InlineData("test", "XX(!t&&s")]
-        public void LtlNextTests(string input, string ltl) {
+        public void LtlNextTest(string input, string ltl) {
             
             IEval evaluation = Program.BuildAstLTL(_ltlEval, ltl);
             Assert.True(evaluation.Eval(input), $"{input} should be true");
@@ -24,7 +24,7 @@ namespace ObjectAlgebra.Tests {
         [Theory]
         [InlineData("acdef", "!b")]
         [InlineData("acbef", "X!b")]
-        public void LtlNegationTests(string input, string ltl) {
+        public void LtlNegationTest(string input, string ltl) {
             
             IEval evaluation = Program.BuildAstLTL(_ltlEval, ltl);
             Assert.True(evaluation.Eval(input), $"{input} should be true");
@@ -33,7 +33,7 @@ namespace ObjectAlgebra.Tests {
         [Theory]
         [InlineData("xxxxxyxxx", "xUy")]
         [InlineData("yxxyx", "yUXXy")]
-        public void LtlUnitlTests(string input, string ltl) {
+        public void LtlUnitlTest(string input, string ltl) {
             
             IEval evaluation = Program.BuildAstLTL(_ltlEval, ltl);
             Assert.True(evaluation.Eval(input), $"{input} should be true");
@@ -41,7 +41,7 @@ namespace ObjectAlgebra.Tests {
 
         [Theory]
         [InlineData("xxxxxyxxx", "xUy")]
-        public void LtlConjunctionTests(string input, string ltl) {
+        public void LtlConjunctionTest(string input, string ltl) {
             
             IEval evaluation = Program.BuildAstLTL(_ltlEval, ltl);
             Assert.True(evaluation.Eval(input), $"{input} should be true");
@@ -50,7 +50,7 @@ namespace ObjectAlgebra.Tests {
         [Theory]
         [InlineData("acab", "X(!a&&!b)")]
         [InlineData("abababa", "(a&&!b)")]
-        public void LtlDisjunctionTests(string input, string ltl) {
+        public void LtlDisjunctionTest(string input, string ltl) {
             
             IEval evaluation = Program.BuildAstLTL(_ltlEval, ltl);
             Assert.True(evaluation.Eval(input), $"{input} should be true");
