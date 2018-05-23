@@ -13,47 +13,46 @@ namespace ObjectAlgebra.Tests {
         }
 
         [Theory]
-        [InlineData("..Todo..")]
-        [InlineData("..Todo..")]
-        public void LtlNextTests(string input) {
+        [InlineData("bab", "Xa")]
+        [InlineData("test", "XX(!t&&s")]
+        public void LtlNextTests(string input, string ltl) {
             
-            IEval evaluation = Program.BuildAstLTL(_ltlEval, "..Todo..");
+            IEval evaluation = Program.BuildAstLTL(_ltlEval, ltl);
             Assert.True(evaluation.Eval(input), $"{input} should be true");
         }
 
         [Theory]
-        [InlineData("..Todo..")]
-        [InlineData("..Todo..")]
-        public void LtlNegationTests(string input) {
+        [InlineData("acdef", "!b")]
+        [InlineData("acbef", "X!b")]
+        public void LtlNegationTests(string input, string ltl) {
             
-            IEval evaluation = Program.BuildAstLTL(_ltlEval, "..Todo..");
+            IEval evaluation = Program.BuildAstLTL(_ltlEval, ltl);
             Assert.True(evaluation.Eval(input), $"{input} should be true");
         }
 
         [Theory]
-        [InlineData("..Todo..")]
-        [InlineData("..Todo..")]
-        public void LtlUnitlTests(string input) {
+        [InlineData("xxxxxyxxx", "xUy")]
+        [InlineData("yxxyx", "yUXXy")]
+        public void LtlUnitlTests(string input, string ltl) {
             
-            IEval evaluation = Program.BuildAstLTL(_ltlEval, "..Todo..");
+            IEval evaluation = Program.BuildAstLTL(_ltlEval, ltl);
             Assert.True(evaluation.Eval(input), $"{input} should be true");
         }
 
         [Theory]
-        [InlineData("..Todo..")]
-        [InlineData("..Todo..")]
-        public void LtlConjunctionTests(string input) {
+        [InlineData("xxxxxyxxx", "xUy")]
+        public void LtlConjunctionTests(string input, string ltl) {
             
-            IEval evaluation = Program.BuildAstLTL(_ltlEval, "..Todo..");
+            IEval evaluation = Program.BuildAstLTL(_ltlEval, ltl);
             Assert.True(evaluation.Eval(input), $"{input} should be true");
         }
 
         [Theory]
-        [InlineData("..Todo..")]
-        [InlineData("..Todo..")]
-        public void LtlDisjunctionTests(string input) {
+        [InlineData("acab", "X(!a&&!b)")]
+        [InlineData("abababa", "(a&&!b)")]
+        public void LtlDisjunctionTests(string input, string ltl) {
             
-            IEval evaluation = Program.BuildAstLTL(_ltlEval, "..Todo..");
+            IEval evaluation = Program.BuildAstLTL(_ltlEval, ltl);
             Assert.True(evaluation.Eval(input), $"{input} should be true");
         }
     }
