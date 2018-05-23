@@ -13,11 +13,11 @@ namespace ObjectAlgebra.Tests {
         }
 
         [Theory]
-        [InlineData ("..Todo..")]
-        [InlineData ("..Todo..")]
-        public void LtlFinallyTests (string input) {
+        [InlineData("xxxxxyxxx", "Fy")]
+        [InlineData("aaaaax", "aUFx")]
+        public void LtlFinallyTests (string input, string ltl) {
 
-            IEval evaluation = Program.BuildAstLTL (_ltlEval, "..Todo..");
+            IEval evaluation = Program.BuildAstLTL (_ltlEval, ltl);
             Assert.True (evaluation.Eval (input), $"{input} should be true");
         }
     }
