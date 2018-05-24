@@ -1,0 +1,120 @@
+% This is LLNCS.DEM the demonstration file of
+% the LaTeX macro package from Springer-Verlag
+% for Lecture Notes in Computer Science,
+% version 2.4 for LaTeX2e as of 16. April 2010
+%
+\documentclass{llncs}
+%
+\usepackage{makeidx}  % allows for indexgeneration
+\usepackage[hidelinks]{hyperref}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage[utf8]{inputenc}
+
+\hypersetup{
+	pdftitle = {Object Algebra - An approach of the Expression Problem},
+	pdfsubject = {Software-Development},
+	pdfauthor = {Marco Buchholz, Max Golubew, Florian Winzek},
+	pdfkeywords = {expression problem, visitor pattern, interpreter pattern, object algebra}, 
+	colorlinks = false
+}
+
+%
+\begin{document}
+%
+\frontmatter          % for the preliminaries
+%
+\pagestyle{headings}  % switches on printing of running heads
+%
+\mainmatter              % start of the contributions
+%
+\title{Object Algebra - An approach of the Expression Problem}
+%
+\titlerunning{Object Algebra - An approach of the Expression Problem}  % abbreviated title (for running head)
+%                                     also used for the TOC unless
+%                                     \toctitle is used
+%
+\author{Marco Buchholz%\inst{1}%\orcidID{0000-1111-2222-3333}
+\and
+Max Golubew%\inst{2}%\orcidID{1111-2222-3333-4444} 
+\and
+Florian Winzek%\orcidID{2222-3333-4444-5555}
+}
+%
+\authorrunning{Marco Buchholz, Max Golubew, Florian Winzek} % abbreviated author list (for running head)
+%
+%%%% list of authors for the TOC (use if author list has to be modified)
+\tocauthor{Marco Buchholz, Max Golubew, Florian Winzek}
+%
+\institute{Institute for Software Engineering and Programming Languages, Universität zu Lübeck\\
+\email{marco.buchholz@student.uni-luebeck.de} \\
+\email{max.golubew@student.uni-luebeck.de} \\
+\email{f.winzek@student.uni-luebeck.de}}
+
+\maketitle              % typeset the title of the contribution
+
+\begin{abstract}
+
+The expression problem is a known problem in practical computer science where the goal is to define types of data and extend them with new types or functions neither with recompiling the code nor retaining static type safety \cite{wadler98}. This paper is about a new approach of dealing with this problem. We will introduce and discuss a new pattern called object algebra and use Linear Temporal Logic (LTL) formulas as examples. We will build a core set of LTL and show how easily new formulas and functions can be added. 
+
+\end{abstract}
+%
+\section{Introduction} \label{sec:introduction}
+
+\section{Expression problem} \label{sec:approaches}
+
+\subsection{Interpreter Pattern} \label{ssec:interpreter}
+
+\subsection{Visitor Pattern} \label{ssec:visitor}
+
+\subsection{Object Algebra} \label{ssec:oa}
+
+\section{Implementation} \label{sec:oa-ltl}
+
+\section{Conclusion} \label{sec:conclusion}
+
+
+%
+% ---- Bibliography ----
+%
+\begin{thebibliography}{5}
+%
+
+\bibitem{wadler98}
+Wadler, P.:
+The Expression Problem.
+E-Mail Discussion (1998),
+\url{http://homepages.inf.ed.ac.uk/wadler/papers/expression/expression.txt}
+
+\bibitem{Odersky05}
+Odersky, M., Zenger, M.:
+Independently Extensible Solutions to the Expression Problem. 
+In FOOL'05
+
+\bibitem{pnueli77}
+Pnueli, A.:
+The temporal logic of programs.
+In 18th Annual Symposium on Foundations of Computer Science, Providence, Rhode Island, USA, 31 October - 1 November 1977, pages 46-57, IEEE Computer Society, 1977
+
+\bibitem{GHJV94}
+Gamma, E., Helm R., Johnson R. and Vlissides J.:
+Design Patterns: Elements of Reusable Object-Oriented Software.
+Addison-Wesley Professional Computing Series, Pearson Education, 1994
+
+\bibitem{Parr09}
+Parr, T.:
+Language Implementation Patterns: Create Your Own Domain-Specific and General Programming Languages.
+Pragmatic Bookshelf, 2009
+
+\bibitem{Oliveira12}
+Oliveira, B., Cook, W.:
+Extensibility for the Masses - Practical Extensibility with Object Algebras.
+In ECOOP 2012 -- Object-Oriented Programming: 26th European Conference, Beijing, China, June 11-16, 2012, pages 2-27, Springer Berlin Heidelberg
+
+\bibitem{Guttag78}
+Guttag, J., Horning, J.:
+The algebraic specification of abstract data types.
+In Acta Informatica Vol. 10, pages 27-52, March 1978
+
+\end{thebibliography}
+\end{document}
