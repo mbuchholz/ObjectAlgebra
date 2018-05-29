@@ -8,12 +8,12 @@ using ObjectAlgebra.Antlr;
 
 namespace ObjectAlgebra
 {
-    public class LTLEvaluateListener<T> : LtlBaseListener
+    public class LtlListener<T> : LtlBaseListener
     {
         readonly ILtlExtension<T> alg;
         readonly Stack<T> arguments = new Stack<T>();
 
-         public LTLEvaluateListener (ILtlExtension<T> alg){
+         public LtlListener (ILtlExtension<T> alg){
              this.alg = alg;
          }
 
