@@ -21,7 +21,7 @@ namespace ObjectAlgebra
                 
                 try
                 {
-                    evaluation = BuildAstLTL(new LtlExtension(), formula);
+                    evaluation = BuildAstLTL(new EvaluationExtension(), formula);
                     printing = BuildAstLTL(new PrettyPrint(), formula);
                     
                     Console.WriteLine("Enter a word that is evaluated against the given ltl formula:");

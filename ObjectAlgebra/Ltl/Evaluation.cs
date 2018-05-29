@@ -3,7 +3,7 @@ using ObjectAlgebra.DynamicProxy;
 
 namespace ObjectAlgebra.Ltl
 {
-    public class LtlBase : ILtlBase<IEval>
+    public class Evaluation : ILtlBase<IEval>
     {
         public IEval Conjunction(IEval left, IEval right)
         {
