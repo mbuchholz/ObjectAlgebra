@@ -55,16 +55,19 @@ Florian Winzek%\orcidID{2222-3333-4444-5555}
 \maketitle              % typeset the title of the contribution
 
 \begin{abstract}
-
-The expression problem is a known problem in practical computer science where the goal is to define types of data and extend them with new types or functions neither with recompiling the code nor retaining static type safety \cite{wadler98}. This paper is about a new approach of dealing with this problem. We will introduce and discuss a new pattern called object algebra and use Linear Temporal Logic (LTL) formulas as examples. We will build a core set of LTL and show how easily new formulas and functions can be added. 
+Das Expression Problem ist ein bekanntes Problem in der Funktionalen Programmierung. Hierbei geht es darum, dass ein Programm, welches aus Datenstrukturen und Funktionen besteht, in diese zwei Dimensionen weiterentwickelt werden soll, ohne das Programm neu kompilieren zu müssen. Die Komplexität des Programs darf ebenfalls nicht größer werden. In diesem Paper behandeln wir einen Ansatz, welcher das Problem lösen kann. In diesem Zusammenhang stellen wir das Konzept der Objekt Algebra. Wir werden Lineare Zeit Logik Formeln (LTL-Formeln) als anschauliches Beispiel benutzen. Um zu zeigen, dass die Objekt Algebra ein Programm auf einfache Art um Operationen und Datenstrukturen weiterentwickeln kann, werden wir zunächst eine Grundmenge von LTL-Formeln betrachten und diese dann um zusätzliche Formeln und Funktionen erweitern.
 
 \end{abstract}
 %
 \section{Einleitung} \label{sec:introduction}
 
-The expression problem is about handling programs and algorithms which includes different types of data structurers or functions/operations. Especially when you want to extend your program and including more operations or another type of data structure you have to rewrite complex code structures. There are several approaches how you can avoid this by using programming patterns and paradigms. We will introduce the common interpreter and visitor pattern discuss them and show an alternative way to handle the expression problem. 
+Beim Expression Problem geht es speziell um Computerprogramme oder Algorithmen. Diese werden im Laufe der Entwicklung immer komplexer. Das bedeutet, es kommen neue Funktionen für bestehende Datentypen hinzu, aber auch neue Datentypen für aktuelle Funktionen. Diese beiden Dimensionen sollten beim Entwicklungsprozess möglichst dynamisch gehalten werden, damit das Programm nicht zu komplex wird. Oftmals muss der Code neu geschrieben und kompiliert werden. 
+
+Es gibt einige Ansätze um zumindest einen der zwei Dimensionen dynamisch weiterzuentwickeln. Wir werden im folgenden Kapitel auf diese Ansätze eingehen und die Vor- und Nachteile erörtern. Im Anschluss stellen wir einen alternativen Ansatz vor, welcher beide Dimensionen gleichzeitig abdeckt. Zum Schluss zeigen wir eine mögliche Implementierung am Beispiel von LTL-Formeln.   
 
 \section{Lösungsansätze} \label{sec:approaches}
+
+In diesem Kapitel wollen wir zunächst ein wenig auf bekannte Software Pattern eingehen, die sich im Kern mit dem Expression Problem auseinandersetzen. Dies sind zum Einen das sogenannte \emph{Interpreter Pattern} und das \emph{Visitor Pattern}. Ein alternativer Ansatz stellt die sogennante \emph{Objekt Algebra} dar, auf welchen wir insbesondere eingehen werden. 
 
 \subsection{Interpreter Pattern} \label{ssec:interpreter}
 
