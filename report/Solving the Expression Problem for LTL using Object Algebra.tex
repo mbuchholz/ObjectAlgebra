@@ -69,19 +69,66 @@ Es gibt einige Ansätze um zumindest einen der zwei Dimensionen dynamisch weiter
 
 In diesem Kapitel wollen wir zunächst ein wenig auf bekannte Software Pattern eingehen, die sich im Kern mit dem Expression Problem auseinandersetzen. Dies sind zum Einen das sogenannte \emph{Interpreter Pattern} und das \emph{Visitor Pattern}. Ein alternativer Ansatz stellt die sogennante \emph{Objekt Algebra} dar, auf welchen wir insbesondere eingehen werden. 
 
-\subsection{Interpreter Pattern} \label{ssec:interpreter}
+\subsection{Interpreter Pattern} \label{sec:interpreter}
 
-\subsection{Visitor Pattern} \label{ssec:visitor}
+\subsection{Visitor Pattern} \label{sec:visitor}
 
-\subsection{Objekt Algebra} \label{ssec:oa}
+\subsection{Objekt Algebra} \label{sec:object-algebra}
 
 \section{Implementation} \label{sec:implementation}
+In diesem Abschnitt geht es um eine konkrete Implementierung der in \autoref{sec:object-algebra} beschriebenen Objekt Algebra.
+Dabei haben wir die \emph{Linear Temporal Logik (LTL)} \cite{pnueli77} verwendet, um die dort definierten Datentypen und Funktionen nachzubilden.
+Genauer gesagt muss eine Datenstruktur für den \emph{abstract syntax tree (AST)} für LTL definiert werden.
+Eine LTL-Formel ist durch die Grammatik in \autoref{lst:grammar} gezeigt.
+
+\begin{lstlisting}
+LTL ::= PROPOSITION | "!" LTL | LTL "||" LTL | LTL "&&" LTL
+	| LTL "U" LTL | "X" LTL | "F" LTL
+PROPOSITION ::= "TRUE" | "FALSE" | VARIABLE
+VARIABLE ::= [a-z];
+\end{lstlisting}\label{lst:grammar}
+
+Daraus ergibt dich, dass der benötigte AST aus den Datenvarianten \emph{Disjunction}, \emph{Conjunction}, \emph{Unary}, \emph{Next}, \emph{Finally}, \emph{Negation}, \emph{Proposition} und \emph{Variable} besteht.
+Um die Erweiterbarkeit der verwendeten Objekt Algebra zu zeigen, haben wir die Implementierung in drei evolutionäre Stufen aufgeteilt.
+Zuerst gibt es nur die Operation \emph{Evaluation} zum Auswerten einer LTL-Formel auf einem gegebenen Wort. Außerdem ist die Datenvariante \emph{Finally} noch nicht implementiert.
+Diese kommt dann in der zweiten Evolution dazu und in der letzten gibt es eine neue Operation mit dem Namen \emph{PrettyPrint}.
+Diese liefert eine String-Repräsentation des AST, welche z.B. auf der dem Benutzer ausgegeben werden kann.
+
+Anhand des Klassendiagramms in \autoref{fig:object-algebra} zeigen wir die Implementierung der Objekt Algebra für LTL-Formeln.
+
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{images/ObjectAlgebra.png}
-	\caption{text}
+	\caption{Ausschnitt des Klassendiagramms. Gezeigt sind die Klassen für die Objekt Algebra}
 	\label{fig:object-algebra}
 \end{figure}
+
+\subsection{Evaluation - Evolution 1}
+Die generische Schnittstelle \emph{ILtLBase} stellt das sogenannte \emph{Object Algerba Interface} dar (vgl. \cite[Abschnitt 3 S.6]{Oliveira12}).
+Dieses bietet die Definitionen der Datenvarianten an, wobei darauf zu achten ist, dass es keine Methode für \emph{Finally} gibt.
+Außerdem ist es durch die generische Typ-Definition unabhängig von einer Operation und trotzdem ist eine statische Typ-Sicherheit gegeben.
+Die Klasse \emph{Evaluation} stellt nun die konkrete \emph{Objekt Algebra} dar.
+
+Dafür wird die Schnittstelle \emph{ILtlBase} implementiert und dessen generischer Parameter an die Schnittstelle \emph{IEval} gebunden.
+\emph{IEval} stellt unsere Operation dar und definiert daher die möglichen Methoden, die auf dem AST ausgeführt werden können.
+Durch die Bindung des generischen Parameters auf die Operation wird nun von jeder Methode in \emph{Evaluation} eine konkrete Implementierung von \emph{IEval} zurückgeliefert.
+Das bedeutet die Objekt Algebra arbeitet vergleichbar zu einer \emph{Factory}, da sie neue Typen des Interfaces (anonym) erstellt und zugleich dessen Instanzen erzeugt.
+
+\subsection{Finally - Evolution 2}
+Nun kommt die neue Datenvariante \emph{Finally} dazu. Dafür kann einfach eine neue Schnittelle erstellt werden, welche das vorhandene \emph{Object Algebra Interface} erweitert.
+\emph{ILtlExtension} realisiert genau diese neue Schnittstelle. Dabei ist darauf zu achten,
+dass auch diese ebenfalls generisch sein muss und ihren Template Parameter an die generalisierte Schnittstelle \emph{ILtlBase} übergibt und nicht durch eine konkrete Realisierung ersetzt.
+
+Nun kann auch dafür eine \emph{Objekt Algebra} erstellt werden.
+Dafür muss eine Klasse nur das neue \emph{Object Algebra Interface} implementieren. In unserer Implementation ist dies die Klasse \emph{EvaluationExtension}.
+Um die Methoden aus der ersten Evolution nicht erneut implementieren zu müssen, wird \emph{Evaluation} erweitert.
+
+\subsection{PrettyPrint - Evolution 3}
+In der letzten Stufe wollen wir zeigen, wie eine neue Operation (\emph{PrettyPrint}) hinzugefügt werden kann. Dafür wird zuerst eine neue Schnittstelle \emph{IPrettyPrint} erstellt.
+Jetzt wird nur noch eine entsprechende \emph{Object Algebra} benötigt. Die Klasse \emph{PrettyPrint} ist genau diese konkrete Realisierung.
+Da sich in diesem Fall keine Datenvariante geändert hat, kann das vorhandene \emph{Object Algebra Interface} \emph{ILtlExtension} implementiert werden.
+Die Klasse \emph{PrettyPrint} dient wieder als Factory und erzeugt somit Instanzen, welche unsere Schnittstelle \emph{IPrettyPrint} implementieren.
+Das ist auch der Grund, warum \textbf{nicht} die Klasse \emph{EvaluationExtension} erweitert werden kann.
 
 \section{Zusammenfassung} \label{sec:conclusion}
 
