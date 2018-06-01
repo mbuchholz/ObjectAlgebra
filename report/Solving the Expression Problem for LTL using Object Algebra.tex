@@ -71,6 +71,10 @@ In diesem Kapitel wollen wir zunächst ein wenig auf bekannte Software Pattern e
 
 \subsection{Interpreter Pattern} \label{sec:interpreter}
 
+Das \emph{Interpreter Pattern} ist eine Entwurfsmethode der Softwaretechnik und ermöglicht es Sätze einer Sprache auf Basis einer definierten Grammatik zu interpretieren. Vor allem bei wiederkehrenden Problemen, die oftmals ähnlich Lösungsansätze haben, wie z.B. das Auswerten von logischen Formeln, ist diese Technik sehr gut einsetzbar. Das Pattern besteht aus einer Abstrakten Klasse, welche eine Interpretationsfunktion bereistellt. Sämtliche Ausdrücke lassen sich in einer ableitenden konkreten Klasse einfach auswerten. Ein Satz kann nun also Schritt für Schritt in Unterausdrücke aufgeteilt werden, die dann ausgewertet werden. Es entsteht ein Syntaxbaum, der von einer Parserklasse aufgebaut wird. Anschließend wird die Interpretationsfunktion aufgerufen und der Baum wird ausgewertet. 
+
+Da die Interpretation in den einzelnen Endknoten des Syntaxbaumes geschieht, ist es sehr einfach, das Programm um neue Knoten zu erweitern. Möchte man nun eine neue Operation hinzufügen, müsste man hingegen jeden einzelnen Knoten des Baumes um diese Funktionalität erweitern. Komplexe Grammatiken sind ebenfalls von Nachteil, da die Anzahl der benötigten Klassen schnell sehr hoch werden kann. Auch ein zu großer Syntaxbaum, kann zu Performanz Probleme führen. 
+
 \subsection{Visitor Pattern} \label{sec:visitor}
 
 \subsection{Objekt Algebra} \label{sec:object-algebra}
