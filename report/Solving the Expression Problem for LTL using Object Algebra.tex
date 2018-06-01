@@ -76,8 +76,15 @@ Das \emph{Interpreter Pattern} ist eine Entwurfsmethode der Softwaretechnik und 
 Da die Interpretation in den einzelnen Endknoten des Syntaxbaumes geschieht, ist es sehr einfach, das Programm um neue Knoten zu erweitern. Möchte man nun eine neue Operation hinzufügen, müsste man hingegen jeden einzelnen Knoten des Baumes um diese Funktionalität erweitern. Komplexe Grammatiken sind ebenfalls von Nachteil, da die Anzahl der benötigten Klassen schnell sehr hoch werden kann. Auch ein zu großer Syntaxbaum, kann zu Performanz Probleme führen. 
 
 \subsection{Visitor Pattern} \label{sec:visitor}
+In der objektorientierten Programmierung bietet das Visitor Pattern die Möglichkeit, neue Operationen zu existierenden Objekten hinzuzufügen, ohne die Struktur zu modifizieren.
+
+Mit dem Visitor Pattern werden zwei Klassenhierarchien definiert. Der \textit{Visitor} implementiert eine Operation, die an \textit{Elementen} einer Objektstruktur ausgeführt wird. 
+Dies ermöglicht es, neue Operationen unabhängig von den Klassen einer Objektstruktur zu erstellen, indem neue Visitor hinzugefügt werden.
+
+Ein Element muss eine \textit{accept}-Methode implementieren, um einen Visitor zu akzeptieren. Diese ruft lediglich die \textit{visit}-Methode vom Visitor auf und übergibt das Element als Parameter. 
 
 \subsection{Objekt Algebra} \label{sec:object-algebra}
+A design pattern inspired by abstract algebra to solve the expression problem without fancy language features. 
 
 \section{Implementation} \label{sec:implementation}
 In diesem Abschnitt geht es um eine konkrete Implementierung der in \autoref{sec:object-algebra} beschriebenen Objekt Algebra.
