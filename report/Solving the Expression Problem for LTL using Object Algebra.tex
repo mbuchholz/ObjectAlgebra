@@ -78,8 +78,7 @@ Da die Interpretation in den einzelnen Endknoten des Syntaxbaumes geschieht, ist
 \subsection{Visitor Pattern} \label{sec:visitor}
 In der objektorientierten Programmierung bietet das Visitor Pattern die Möglichkeit, neue Operationen zu existierenden Objekten hinzuzufügen, ohne die Struktur zu modifizieren.
 
-Mit dem Visitor Pattern werden zwei Klassenhierarchien definiert. Der \textit{Visitor} implementiert eine Operation, die an \textit{Elementen} (oder Datenvarianten) einer Objektstruktur ausgeführt werden kann. 
-Dies ermöglicht es, neue Operationen unabhängig von den Klassen zu erstellen, indem neue Visitor hinzugefügt werden.
+Mit dem Visitor Pattern werden zwei Klassenhierarchien definiert. Der \textit{Visitor} implementiert eine Operation, die an \textit{Elementen} (oder Datenvarianten) einer Objektstruktur ausgeführt werden kann. Dies ermöglicht es, neue Operationen unabhängig von den Klassen zu erstellen, indem neue Visitor hinzugefügt werden. \cite{GHJV94}
 
 Das Klassendiagramm in Abbildung \ref{fig:visitor-pattern} zeigt ein Beispiel einer solchen Implementierung. Ein Element muss eine \textit{accept}-Methode implementieren, um einen Visitor zu akzeptieren. Diese Methode wird aufgerufen, wenn der Visitor eine Operation auf diesem Element ausführen will. Dabei wird als Argument eine Instanz des Visitors übergeben. In der \textit{accept}-Methode wird danach die \textit{visit}-Methode des jeweiligen Visitors für die eigene Instanz aufgerufen. Ein Visitor implementiert somit für jedes Element eine spezifische Operation.
 
@@ -108,7 +107,7 @@ Nachfolgend werden die Vor- und Nachteile des Visitor Patterns zusammengefasst: 
 \end{itemize}
 
 \subsection{Objekt Algebra} \label{sec:object-algebra}
-Mit der Objekt Algebra wurde eine weitere Lösung für das Expression Problem vorgeschlagen. Die Objekt Algebra basiert auf algebraischen Signaturen, die Werte einer abstrakten Menge zurück geben. Dabei wird eine generische Schnittstelle erstellt, deren Parameter vom abstrakten Typ sind. Eine solche Schnittstelle wird als \textit{Objektalgebra}-Schnittstelle bezeichnet.
+Mit der Objekt Algebra wurde eine weitere Lösung für das Expression Problem vorgeschlagen \cite{Oliveira12}. Die Objekt Algebra basiert auf algebraischen Signaturen, die Werte einer abstrakten Menge zurück geben \cite{Guttag78}. Dabei wird eine generische Schnittstelle erstellt, deren Parameter vom abstrakten Typ sind. Eine solche Schnittstelle wird als \textit{Objektalgebra}-Schnittstelle bezeichnet.
 
 \textit{Objektalgebra}-Schnittstellen  sind den \textit{Asbtract-Factory}-Schnittstellen sehr ähnlich. Der Unterschied besteht darin, dass eine \textit{Factory}-Schnittstelle typischerweise eine bestimmte Klasse als Ergebnistyp verwendet, während die \textit{Objektalgebra}-Schnittstelle einen generischen Typ besitzt.
 
