@@ -78,10 +78,10 @@ Da die Interpretation in den einzelnen Endknoten des Syntaxbaumes geschieht, ist
 \subsection{Visitor Pattern} \label{sec:visitor}
 In der objektorientierten Programmierung bietet das Visitor Pattern die Möglichkeit, neue Operationen zu existierenden Objekten hinzuzufügen, ohne die Struktur zu modifizieren.
 
-Mit dem Visitor Pattern werden zwei Klassenhierarchien definiert. Der \textit{Visitor} implementiert eine Operation, die an \textit{Elementen} einer Objektstruktur ausgeführt werden kann. 
+Mit dem Visitor Pattern werden zwei Klassenhierarchien definiert. Der \textit{Visitor} implementiert eine Operation, die an \textit{Elementen} (oder Datenvarianten) einer Objektstruktur ausgeführt werden kann. 
 Dies ermöglicht es, neue Operationen unabhängig von den Klassen zu erstellen, indem neue Visitor hinzugefügt werden.
 
-Das Klassendiagramm in Abbildung \ref{fig:visitor-pattern} zeigt ein Beipsiel einer solchen Implementierung. Ein Element muss eine \textit{accept}-Methode implementieren, um einen Visitor zu akzeptieren. Diese Methode wird aufgerufen, wenn der Visitor eine Operation auf diesem Element ausführen will. Dabei wird als Argument eine Instanz des Visitors übergeben. In der \textit{accept}-Methode wird danach die \textit{visit}-Methode des jeweiligen Visitors für die eigene Instanz aufgerufen. Ein Visitor implementiert somit für jedes Element eine spezifische Operation.
+Das Klassendiagramm in Abbildung \ref{fig:visitor-pattern} zeigt ein Beispiel einer solchen Implementierung. Ein Element muss eine \textit{accept}-Methode implementieren, um einen Visitor zu akzeptieren. Diese Methode wird aufgerufen, wenn der Visitor eine Operation auf diesem Element ausführen will. Dabei wird als Argument eine Instanz des Visitors übergeben. In der \textit{accept}-Methode wird danach die \textit{visit}-Methode des jeweiligen Visitors für die eigene Instanz aufgerufen. Ein Visitor implementiert somit für jedes Element eine spezifische Operation.
 
 Die beschriebene Logik der \textit{accept}- und \textit{visit}-Methoden ist ein \textit{double-dispatch} Machanismus und wird bei dem Visitor Pattern vorausgesetzt.
 
@@ -108,7 +108,16 @@ Nachfolgend werden die Vor- und Nachteile des Visitor Patterns zusammengefasst: 
 \end{itemize}
 
 \subsection{Objekt Algebra} \label{sec:object-algebra}
-A design pattern inspired by abstract algebra to solve the expression problem without fancy language features. 
+Mit der Objekt Algebra wurde eine weitere Lösung für das Expression Problem vorgeschlagen. Die Objekt Algebra basiert auf algebraischen Signaturen, die Werte einer abstrakten Menge zurück geben. Dabei wird eine generische Schnittstelle erstellt, deren Parameter vom abstrakten Typ sind. Eine solche Schnittstelle wird als \textit{Objektalgebra}-Schnittstelle bezeichnet.
+
+\textit{Objektalgebra}-Schnittstellen  sind den \textit{Asbtract-Factory}-Schnittstellen sehr ähnlich. Der Unterschied besteht darin, dass eine \textit{Factory}-Schnittstelle typischerweise eine bestimmte Klasse als Ergebnistyp verwendet, während die \textit{Objektalgebra}-Schnittstelle einen generischen Typ besitzt.
+
+Die \textit{Factory}-Schnittstelle kann abgeleitet werden, indem der abstrakte Typ auf die spezifische Objektschnittstelle der zu erstellenden Objekte intsanziiert wird.
+
+Objekt Algebra ist ähnlich zu dem Visitor Pattern. Während die Operationen bei dem Visitor Pattern in Visitor-Klassen implementiert werden und Datenvarianten als Elemente umgsetzt werden, verwendet die Objekt Algebra generische \textit{factory}-Schnittstellen um Datenvarianten zu repräsentieren. Die Operationen werden dann durch die Implementierung der factory umgesetzt.
+
+Neue Datenvarianten können somit durch die Erweiterung der Schnittstelle hinzugefügt werden und die Operationen durch die Implementierung.
+
 
 \section{Implementation} \label{sec:implementation}
 In diesem Abschnitt geht es um eine konkrete Implementierung der in \autoref{sec:object-algebra} beschriebenen Objekt Algebra.
