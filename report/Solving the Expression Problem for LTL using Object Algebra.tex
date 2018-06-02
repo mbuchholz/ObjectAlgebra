@@ -78,10 +78,34 @@ Da die Interpretation in den einzelnen Endknoten des Syntaxbaumes geschieht, ist
 \subsection{Visitor Pattern} \label{sec:visitor}
 In der objektorientierten Programmierung bietet das Visitor Pattern die Möglichkeit, neue Operationen zu existierenden Objekten hinzuzufügen, ohne die Struktur zu modifizieren.
 
-Mit dem Visitor Pattern werden zwei Klassenhierarchien definiert. Der \textit{Visitor} implementiert eine Operation, die an \textit{Elementen} einer Objektstruktur ausgeführt wird. 
-Dies ermöglicht es, neue Operationen unabhängig von den Klassen einer Objektstruktur zu erstellen, indem neue Visitor hinzugefügt werden.
+Mit dem Visitor Pattern werden zwei Klassenhierarchien definiert. Der \textit{Visitor} implementiert eine Operation, die an \textit{Elementen} einer Objektstruktur ausgeführt werden kann. 
+Dies ermöglicht es, neue Operationen unabhängig von den Klassen zu erstellen, indem neue Visitor hinzugefügt werden.
 
-Ein Element muss eine \textit{accept}-Methode implementieren, um einen Visitor zu akzeptieren. Diese ruft lediglich die \textit{visit}-Methode vom Visitor auf und übergibt das Element als Parameter. 
+Das Klassendiagramm in Abbildung \ref{fig:visitor-pattern} zeigt ein Beipsiel einer solchen Implementierung. Ein Element muss eine \textit{accept}-Methode implementieren, um einen Visitor zu akzeptieren. Diese Methode wird aufgerufen, wenn der Visitor eine Operation auf diesem Element ausführen will. Dabei wird als Argument eine Instanz des Visitors übergeben. In der \textit{accept}-Methode wird danach die \textit{visit}-Methode des jeweiligen Visitors für die eigene Instanz aufgerufen. Ein Visitor implementiert somit für jedes Element eine spezifische Operation.
+
+Die beschriebene Logik der \textit{accept}- und \textit{visit}-Methoden ist ein \textit{double-dispatch} Machanismus und wird bei dem Visitor Pattern vorausgesetzt.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{images/VisitorPattern.png}
+	\caption{Beispiel Visitor Pattern}
+	\label{fig:visitor-pattern}
+\end{figure}
+
+Nachfolgend werden die Vor- und Nachteile des Visitor Patterns zusammengefasst: \linebreak
+
+\textbf{Vorteile:}
+\begin{itemize}
+	\item[$\bullet$] Mit dem Erstellen eines neuen Visitors, der das Visitor-Interface implementiert, können neue Operationen einfach hinzugefügt werden, ohne die Struktur zu modifizieren.
+	\item[$\bullet$] Beim Hinzufügen einer neuen Operation erfolgt die Trennung der Logik durch einen neuen Visitor. Damit unterstützt das Pattern automatisch das \textit{Separation of Concerns} Prinzip.
+\end{itemize}
+
+\textbf{Nachteile:}
+\begin{itemize}
+	\item[$\bullet$] Werden in einer Element-Klasse Veränderungen vorgenommen, so muss wahrscheinlich auch die Visitor-Klasse überarbeitet werden.
+	\item[$\bullet$] Beim Hinzufügen neuer Element-Klassen muss das Visitor-Interface mit den entsprechenden visit-Methoden erweitert werden.
+	\item[$\bullet$] Das Visitor Pattern verletzt die Eigenschaft der Datenkapselung der Objektorientierten Programmierung. Die Schnittstelle der Elemente muss öffentliche Methoden beinhalten, damit der Visitor diese verwenden kann.
+\end{itemize}
 
 \subsection{Objekt Algebra} \label{sec:object-algebra}
 A design pattern inspired by abstract algebra to solve the expression problem without fancy language features. 
