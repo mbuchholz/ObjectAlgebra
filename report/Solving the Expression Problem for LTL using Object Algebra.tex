@@ -62,6 +62,7 @@ Das Expression Problem ist ein bekanntes Problem in der Funktionalen Programmier
 \section{Einleitung} \label{sec:introduction}
 
 Beim Expression Problem geht es speziell um Computerprogramme oder Algorithmen. Diese werden im Laufe der Entwicklung immer komplexer. Das bedeutet, es kommen neue Funktionen für bestehende Datentypen hinzu, aber auch neue Datentypen für aktuelle Funktionen. Diese beiden Dimensionen sollten beim Entwicklungsprozess möglichst dynamisch gehalten werden, damit das Programm nicht zu komplex wird. Oftmals muss der Code neu geschrieben und kompiliert werden. 
+\cite{wadler98}
 
 Es gibt einige Ansätze um zumindest einen der zwei Dimensionen dynamisch weiterzuentwickeln. Wir werden im folgenden Kapitel auf diese Ansätze eingehen und die Vor- und Nachteile erörtern. Im Anschluss stellen wir einen alternativen Ansatz vor, welcher beide Dimensionen gleichzeitig abdeckt. Zum Schluss zeigen wir eine mögliche Implementierung am Beispiel von LTL-Formeln.   
 
@@ -74,6 +75,7 @@ In diesem Kapitel wollen wir zunächst ein wenig auf bekannte Software Pattern e
 Das \emph{Interpreter Pattern} ist eine Entwurfsmethode der Softwaretechnik und ermöglicht es Sätze einer Sprache auf Basis einer definierten Grammatik zu interpretieren. Vor allem bei wiederkehrenden Problemen, die oftmals ähnlich Lösungsansätze haben, wie z.B. das Auswerten von logischen Formeln, ist diese Technik sehr gut einsetzbar. Das Pattern besteht aus einer Abstrakten Klasse, welche eine Interpretationsfunktion bereistellt. Sämtliche Ausdrücke lassen sich in einer ableitenden konkreten Klasse einfach auswerten. Ein Satz kann nun also Schritt für Schritt in Unterausdrücke aufgeteilt werden, die dann ausgewertet werden. Es entsteht ein Syntaxbaum, der von einer Parserklasse aufgebaut wird. Anschließend wird die Interpretationsfunktion aufgerufen und der Baum wird ausgewertet. 
 
 Da die Interpretation in den einzelnen Endknoten des Syntaxbaumes geschieht, ist es sehr einfach, das Programm um neue Knoten zu erweitern. Möchte man nun eine neue Operation hinzufügen, müsste man hingegen jeden einzelnen Knoten des Baumes um diese Funktionalität erweitern. Komplexe Grammatiken sind ebenfalls von Nachteil, da die Anzahl der benötigten Klassen schnell sehr hoch werden kann. Auch ein zu großer Syntaxbaum, kann zu Performanz Probleme führen. 
+\cite{hills2011case}
 
 \subsection{Visitor Pattern} \label{sec:visitor}
 In der objektorientierten Programmierung bietet das Visitor Pattern die Möglichkeit, neue Operationen zu existierenden Objekten hinzuzufügen, ohne die Struktur zu modifizieren.
@@ -187,6 +189,11 @@ Wadler, P.:
 The Expression Problem.
 E-Mail Discussion (1998),
 \url{http://homepages.inf.ed.ac.uk/wadler/papers/expression/expression.txt}
+
+\bibitem{hills2011case}
+Hills, Mark and Klint, Paul and Van Der Storm, Tijs and Vinju, Jurgen.
+A case of visitor versus interpreter pattern.
+International Conference on Modelling Techniques and Tools for Computer Performance Evaluation
 
 \bibitem{Odersky05}
 Odersky, M., Zenger, M.:
