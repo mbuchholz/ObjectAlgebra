@@ -85,7 +85,7 @@ Mit dem Visitor Pattern werden zwei Klassenhierarchien definiert. Der \textit{Vi
 
 Das Klassendiagramm in Abbildung \ref{fig:visitor-pattern} zeigt ein Beispiel einer solchen Implementierung. Ein Element muss eine \textit{accept}-Methode implementieren, um einen Visitor zu akzeptieren. Diese Methode wird aufgerufen, wenn der Visitor eine Operation auf diesem Element ausführen will. Dabei wird als Argument eine Instanz des Visitors übergeben. In der \textit{accept}-Methode wird danach die \textit{visit}-Methode des jeweiligen Visitors für die eigene Instanz aufgerufen. Ein Visitor implementiert somit für jedes Element eine spezifische Operation.
 
-Die beschriebene Logik der \textit{accept}- und \textit{visit}-Methoden ist ein \textit{double-dispatch} Machanismus und wird bei dem Visitor Pattern vorausgesetzt.
+Die beschriebene Logik der \textit{accept}- und \textit{visit}-Methoden ist ein \textit{double-dispatch} Mechanismus und wird bei dem Visitor Pattern vorausgesetzt.
 
 \begin{figure}[h]
 	\centering
@@ -114,7 +114,7 @@ Mit der Objekt Algebra wurde eine weitere Lösung für das Expression Problem vo
 
 \textit{Objektalgebra}-Schnittstellen  sind den \textit{Abstract-Factory}-Schnittstellen sehr ähnlich. Der Unterschied besteht darin, dass eine \textit{Factory}-Schnittstelle typischerweise eine bestimmte Klasse als Ergebnistyp verwendet, während die \textit{Objektalgebra}-Schnittstelle einen generischen Typ besitzt.
 
-Die \textit{Factory}-Schnittstelle kann abgeleitet werden, indem der abstrakte Typ auf die spezifische Objektschnittstelle der zu erstellenden Objekte intsanziiert wird.
+Die \textit{Factory}-Schnittstelle kann abgeleitet werden, indem der abstrakte Typ auf die spezifische Objektschnittstelle der zu erstellenden Objekte instanziiert wird.
 
 Objekt Algebra ist ähnlich zu dem Visitor Pattern. Während die Operationen bei dem Visitor Pattern in Visitor-Klassen implementiert werden und Datenvarianten als Elemente umgsetzt werden, verwendet die Objekt Algebra generische \textit{factory}-Schnittstellen um Datenvarianten zu repräsentieren. Die Operationen werden dann durch die Implementierung der factory umgesetzt.
 
@@ -161,7 +161,7 @@ Durch die Bindung des generischen Parameters auf die Operation wird nun von jede
 Das bedeutet die Objekt Algebra arbeitet vergleichbar zu einer \emph{Factory}, da sie neue Typen des Interfaces (anonym) erstellt und zugleich dessen Instanzen erzeugt.
 
 \subsection{Finally - Evolution 2}
-Nun kommt die neue Datenvariante \emph{Finally} dazu. Dafür kann einfach eine neue Schnittelle erstellt werden, welche das vorhandene \emph{Object Algebra Interface} erweitert.
+Nun kommt die neue Datenvariante \emph{Finally} dazu. Dafür kann einfach eine neue Schnittstelle erstellt werden, welche das vorhandene \emph{Object Algebra Interface} erweitert.
 \emph{ILtlExtension} realisiert genau diese neue Schnittstelle. Dabei ist darauf zu achten,
 dass auch diese ebenfalls generisch sein muss und ihren Template Parameter an die generalisierte Schnittstelle \emph{ILtlBase} übergibt und nicht durch eine konkrete Realisierung ersetzt.
 
